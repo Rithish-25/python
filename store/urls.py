@@ -1,13 +1,16 @@
 from django.urls import path
 from . import views
 
-from store.controller import authview, cart, wishlist, checkout
+from store.controller import authview, cart, wishlist, checkout, order
 
 urlpatterns = [
     path('', views.home, name="home"),
     path('collections', views.collections, name="collections"),
     path('collections/<str:slug>', views.collectionsview, name="collectionsview"),
     path('collections/<str:cate_slug>/<str:prod_slug>', views.Productview, name="Productview"),
+
+    path('product-list',views.productlistAjax),
+    path('searchproduct',views.searchproduct, name="searchproduct"),
 
     path('register/',authview.register, name="register"),
     path('login/',authview.login, name="loginpage"),
@@ -25,7 +28,13 @@ urlpatterns = [
 
     path('checkout',checkout.index, name="checkout"),
     path('place-order',checkout.placeorder, name="placeorder"),
-    path('proceed-to-pay', checkout.razorpaycheck)
+    path('proceed-to-pay', checkout.razorpaycheck),
+
+
+    path('my-orders',order.index, name="myorders"),
+    path('view-order/<str:t_no>', order.vieworder, name="orderview")
+
+    
     
 
 
