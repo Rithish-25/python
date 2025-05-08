@@ -1,35 +1,42 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<!-- Add this in your <head> if Font Awesome isn't already included -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
       <a class="navbar-brand" href="/">E-Shop</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-     
-      <div class="search-bar">
-        <form action="{% url 'searchproduct' %}" method="POST">
-           {% csrf_token %} 
-      <div class="input-group ">
-        <input type="search" reqquired class="form-control" name="productsearch" id="searchproducts" placeholder="Search Products">
-        <button class="input-group-text" ><i class="fa fa-search"> </i></button>
-      </div>
-    </form>
+  
+      <!-- Search Bar -->
+<!-- Search Bar -->
+<div class="search-bar">
+  <form action="{% url 'searchproduct' %}" method="POST" class="d-flex">
+    {% csrf_token %}
+    <div class="input-group">
+      <input type="search" required class="form-control" name="productsearch" id="searchproducts" placeholder="Search Products">
+      <button type="submit" style="border: 1px solid #ccc; background-color: white; padding: 6px 10px; border-radius: 4px;">
+        <i class="fa fa-search" style="color: #555;"></i>
+      </button>
     </div>
- 
+  </form>
+</div>
 
+  
+      <!-- Navbar Links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'collections' %}active{% endif %}" href="{% url 'collections' %}">Collections</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}" aria-current="page" href="{% url 'cart' %}">Cart</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}" href="{% url 'cart' %}">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'wishlist' %}active{% endif %}" aria-current="page" href="{% url 'wishlist' %}">Wishlist</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'wishlist' %}active{% endif %}" href="{% url 'wishlist' %}">Wishlist</a>
           </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item dropdown">
@@ -43,23 +50,19 @@
               <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
             </ul>
           </li>
-  
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-
           </li>
           {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'loginpage' %}">Login</a>
-            
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'register' %}">Register</a>
           </li>
-
           {% endif %}
-          
         </ul>
       </div>
     </div>
   </nav>
+  
