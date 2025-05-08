@@ -19,18 +19,16 @@ def addtowishlist(request):
             product_check = Product.objects.get(id=prod_id)
             if(product_check):
                 if(Wishlist.objects.filter(user=request.user, product_id=prod_id)):
-                   return JsonResponse({'status:':"Product Already in wishlist"})
+                   return JsonResponse({'status': "Product Already in wishlist"})
                 else:
                     Wishlist.objects.create(user=request.user, product_id = prod_id)
-                    return JsonResponse({'status:':"Product Added to  wishlist"})
+                    return JsonResponse({'status': "Product Added to wishlist"})
             else:
-                return JsonResponse({'status:':"No such product Found"})    
-
-
+                return JsonResponse({'status': "No such product Found"})
         else:
-            return JsonResponse({'status': "Login to continue"})    
+            return JsonResponse({'status': "Login to continue"})
+    return redirect('/')
 
-    return redirect('/')    
 
 from django.views.decorators.csrf import csrf_exempt
 
